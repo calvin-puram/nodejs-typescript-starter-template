@@ -14,6 +14,10 @@ class AuthRoute implements Route {
   public initializeRoute() {
     this.router.post(`${this.path}/register`, this.AuthController.register);
     this.router.post(`${this.path}/login`, this.AuthController.login);
+    this.router.patch(
+      `${this.path}/forgotPassword`,
+      this.AuthController.forgotPassword
+    );
   }
 }
 

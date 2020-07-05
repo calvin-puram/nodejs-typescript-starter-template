@@ -41,6 +41,19 @@ class AuthService {
 
     return user;
   };
+
+  public forgotPassword = async (userData: { email: string }) => {
+    if (isEmptyObject(userData))
+      throw new HttpException(400, "email  is required");
+    const user: User = await this.users.findOne({ email: userData.email });
+    if (!user) {
+      throw new HttpException(
+        404,
+        "this email is not registered on this platform"
+      );
+    }
+    return user;
+  };
 }
 
 export default AuthService;

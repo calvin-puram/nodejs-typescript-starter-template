@@ -1,7 +1,7 @@
-import nodemailer from "nodemailer";
-import pug from "pug";
-import path from "path";
-import htmlToText from "html-to-text";
+import * as nodemailer from "nodemailer";
+import * as pug from "pug";
+import * as path from "path";
+import * as htmlToText from "html-to-text";
 import User from "../interface/user.interface";
 import { EmailData } from "../interface/auth.interface";
 import * as SMTPTransport from "nodemailer/lib/smtp-transport";

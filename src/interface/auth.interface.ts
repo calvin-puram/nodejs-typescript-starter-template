@@ -6,6 +6,8 @@ export interface TokenData {
   sendToken(): string;
   comparePassword(candidatePassword: string, userPassword: string): boolean;
   checkpassword(jwtTimestamp: number): boolean;
+  sendResetToken(): string;
+  save(validate: { validateBeforeSave: boolean }): void;
 }
 
 export interface LoginData {

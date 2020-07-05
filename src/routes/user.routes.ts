@@ -13,7 +13,7 @@ class UserRoute implements Route {
   }
 
   public initializeRoutes() {
-    this.router.use(protect);
+    // this.router.use(protect);
     this.router.get(`${this.path}s`, this.UserController.getAllUsers);
 
     this.router

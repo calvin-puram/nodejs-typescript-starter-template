@@ -8,6 +8,8 @@ interface User extends TokenData {
   confirmPassword: string;
   role?: string;
   passwordChangeAt?: number;
+  forgetPasswordResetToken: string;
+  forgetPasswordExpires: Date;
   createdAt?: Date;
 }
 

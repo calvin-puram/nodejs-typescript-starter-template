@@ -3,6 +3,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import User from "../interface/user.interface";
 import validator from "validator";
+import * as crypto from "crypto";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -37,6 +38,8 @@ const UserSchema = new mongoose.Schema({
     default: "user",
   },
   passwordChangeAt: Date,
+  forgetPasswordResetToken: String,
+  forgetPasswordExpires: Date,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -87,6 +90,18 @@ UserSchema.methods.comparePassword = async (
   userPassword: string
 ): Promise<boolean> => {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+// send reset token
+UserSchema.methods.sendResetToken = function (): string {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  this.forgetPasswordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  this.forgetPasswordExpires = Date.now() + 10 * 60 * 1000;
+  return resetToken;
 };
 
 const UserModel = mongoose.model<User & mongoose.Document>("Users", UserSchema);

@@ -8,7 +8,7 @@ import * as mongoose from "mongoose";
 import Route from "./interface/routes.interface";
 import logger from "./utils/logger";
 import errorMiddleware from "./middleware/error.middleware";
-import path from "path";
+import * as globalPath from "path";
 import * as rateLimit from "express-rate-limit";
 import * as mongoSanitize from "express-mongo-sanitize";
 import * as compression from "compression";
@@ -71,8 +71,8 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cookieParser());
     this.app.set("view engine", "pug");
-    this.app.set("views", path.join(__dirname, "views"));
-    this.app.use(express.static(path.join(__dirname, "public")));
+    this.app.set("views", globalPath.join(__dirname, "views"));
+    this.app.use(express.static(globalPath.join(__dirname, "public")));
   }
 
   private connectToDatabase() {
