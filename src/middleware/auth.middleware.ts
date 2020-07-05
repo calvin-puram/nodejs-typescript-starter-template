@@ -30,7 +30,7 @@ export default catchAsync(
     const currentUser: User = await Users.findById(decode.id).select(
       "+password"
     );
-    console.log(decode);
+    
 
     if (!currentUser) {
       return next(new HttpException(401, "user no longer exist"));

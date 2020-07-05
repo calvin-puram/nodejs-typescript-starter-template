@@ -78,7 +78,7 @@ UserSchema.methods.checkpassword = function (jwtTimestamp: number): boolean {
   if (this.passwordChangeAt) {
     const convert = `${this.passwordChangeAt.getTime() / 1000}`;
     const convertTime = parseInt(convert, 10);
-    console.log(jwtTimestamp, convertTime);
+    
     return jwtTimestamp < convertTime;
   }
   return false;

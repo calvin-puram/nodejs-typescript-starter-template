@@ -1,7 +1,7 @@
 import { TokenData } from "./auth.interface";
 
 interface User extends TokenData {
-  _id?: string;
+  id?: string;
   name: string;
   email: string;
   password: string;
