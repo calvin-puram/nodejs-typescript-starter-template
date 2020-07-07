@@ -3,11 +3,12 @@ import User from "./user.interface";
 import { TransportOptions } from "nodemailer";
 
 export interface TokenData {
-  sendToken(): string;
-  comparePassword(candidatePassword: string, userPassword: string): boolean;
-  checkpassword(jwtTimestamp: number): boolean;
-  sendResetToken(): string;
-  save(validate: { validateBeforeSave: boolean }): void;
+  _id?: object;
+  sendToken?(): string;
+  comparePassword?(candidatePassword: string, userPassword: string): boolean;
+  checkpassword?(jwtTimestamp: number): boolean;
+  sendResetToken?(): string;
+  save?(validate: { validateBeforeSave: boolean }): void;
 }
 
 export interface LoginData {
