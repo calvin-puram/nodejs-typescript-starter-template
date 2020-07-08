@@ -51,7 +51,7 @@ class AuthController {
           ? "http://localhost:4000/"
           : "https://domain.com/home";
 
-      await new SendEmail(user, url).sendWelcome();
+      // await new SendEmail(user, url).sendWelcome();
 
       this.setToken(user, res, 200);
     }
@@ -137,12 +137,10 @@ class AuthController {
       const id: string = req.params.id;
       const userData: { name: string; email: string } = req.body;
       if (req.body.password) {
-        return next(
-          new HttpException(
-            400,
-            "you can only update name and email in this route"
-          )
-        );
+        return res.status(400).json({
+          success: false,
+          msg: "you can only update name and email in this route",
+        });
       }
 
       const user = await this.AuthService.updateDetails(userData, id);

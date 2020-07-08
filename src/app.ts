@@ -84,7 +84,7 @@ class App {
     };
 
     mongoose
-      .connect(process.env.MONGO_URL, { ...options })
+      .connect(process.env.MONGO_URL_TEST, { ...options })
       .then(() => logger.info("connected to database"))
       .catch((err) => logger.error(err.message));
   }

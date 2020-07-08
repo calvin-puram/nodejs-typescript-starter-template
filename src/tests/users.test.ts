@@ -43,18 +43,6 @@ describe("Testing Users", () => {
       expect(res.status).toBe(200);
       expect(res.body.success).toBeTruthy();
     });
-
-    // it("should throw error if no user is found", async () => {
-    //   const res = await request(app.getServer()).get(
-    //     `${userRoute.path}/5f048da6d4e82f0eec98fb8z`
-    //   );
-
-    //   const err = new HttpException(400, "user not found");
-    //   console.log(res.body);
-    //   expect(err).toHaveBeenCalled();
-    //   // expect(res.body.success).toBeFalsy();
-    //   // expect(res.body.msg).toBe("user not found");
-    // });
   });
 
   describe("[DELETE] /user/:id", () => {

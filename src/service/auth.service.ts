@@ -99,7 +99,7 @@ class AuthService {
 
   public updatePassword = async (
     userData: { newPass: string; currPass: string; confirmPass: string },
-    id: string
+    id: object
   ) => {
     if (!userData.newPass || !userData.currPass || !userData.confirmPass) {
       throw new HttpException(400, "all fields are required!");

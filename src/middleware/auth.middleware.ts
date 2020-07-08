@@ -19,7 +19,10 @@ export default catchAsync(
     }
 
     if (!token) {
-      return next(new HttpException(401, "you are not logged in"));
+      return res.status(401).json({
+        success: false,
+        msg: "you are not logged in",
+      });
     }
 
     const decode:
@@ -30,19 +33,19 @@ export default catchAsync(
     const currentUser: User = await Users.findById(decode.id).select(
       "+password"
     );
-    
 
     if (!currentUser) {
-      return next(new HttpException(401, "user no longer exist"));
+      return res.status(401).json({
+        success: false,
+        msg: "user no longer exist",
+      });
     }
 
     if (currentUser.checkpassword(decode.iat)) {
-      return next(
-        new HttpException(
-          401,
-          "this user recently changed his password. login again"
-        )
-      );
+      return res.status(401).json({
+        success: false,
+        msg: "this user recently changed his password. login again",
+      });
     }
 
     req.user = currentUser;
