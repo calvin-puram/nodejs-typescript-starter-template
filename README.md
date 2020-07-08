@@ -13,7 +13,7 @@ This is a Nodejs biolerplate template for easy building up of backend web app. I
 - update user details such as email, name
 - logout
 
-### User Rooute (Protected)
+### User Route (Protected)
 
 - get all users,
 - get single user,
@@ -25,7 +25,7 @@ This is a Nodejs biolerplate template for easy building up of backend web app. I
 
 ### Project Architecture
 
-I have chosen to use a Model View Controller Architecture that organises the codebase models, view and controllers.
+I have chosen to use a Model View Controller Architecture that organises the codebase into models, views and controllers.
 
 ### Utilities Developed
 
