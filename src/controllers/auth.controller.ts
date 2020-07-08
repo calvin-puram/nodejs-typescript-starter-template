@@ -51,7 +51,7 @@ class AuthController {
           ? "http://localhost:4000/"
           : "https://domain.com/home";
 
-      // await new SendEmail(user, url).sendWelcome();
+      await new SendEmail(user, url).sendWelcome();
 
       this.setToken(user, res, 200);
     }
@@ -122,7 +122,7 @@ class AuthController {
 
   public getMe = catchAsync(
     async (req: RequestWithUser, res: Response, next: NextFunction) => {
-      const userId: string = req.user.id;
+      const userId: object = req.user.id;
       const user: User = await this.AuthService.getMe(userId);
 
       res.status(200).json({
@@ -156,7 +156,7 @@ class AuthController {
         currPass: string;
         confirmPass: string;
       } = req.body;
-      const id: string = req.user.id;
+      const id: object = req.user.id;
 
       const user: User = await this.AuthService.updatePassword(userData, id);
 

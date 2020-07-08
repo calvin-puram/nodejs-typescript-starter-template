@@ -78,7 +78,7 @@ UserSchema.methods.checkpassword = function (jwtTimestamp: number): boolean {
   if (this.passwordChangeAt) {
     const convert = `${this.passwordChangeAt.getTime() / 1000}`;
     const convertTime = parseInt(convert, 10);
-    
+
     return jwtTimestamp < convertTime;
   }
   return false;
@@ -96,10 +96,7 @@ UserSchema.methods.comparePassword = async (
 UserSchema.methods.sendResetToken = function (): string {
   const resetToken = crypto.randomBytes(20).toString("hex");
 
-  this.forgetPasswordResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+  this.forgetPasswordResetToken = resetToken;
   this.forgetPasswordExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };

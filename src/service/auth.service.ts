@@ -1,4 +1,3 @@
-import * as crypto from "crypto";
 import { isEmptyObject } from "../utils/checkObject";
 import userModel from "../models/user.model";
 import User from "../interface/user.interface";
@@ -44,9 +43,7 @@ class AuthService {
   };
 
   public forgotPassword = async (userData: { email: string }) => {
-    if (isEmptyObject(userData)) {
-      throw new HttpException(400, "email  is required");
-    }
+    if (!userData.email) throw new HttpException(400, "email is required");
     const user: User = await this.users.findOne({ email: userData.email });
     if (!user) {
       throw new HttpException(
@@ -58,14 +55,9 @@ class AuthService {
   };
 
   public resetPassword = async (hashToken: string) => {
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(hashToken)
-      .digest("hex");
-
     const currentdate: any = Date.now();
     const user = await this.users.findOne({
-      forgetPasswordResetToken: hashedToken,
+      forgetPasswordResetToken: hashToken,
       forgetPasswordExpires: { $gte: currentdate },
     });
 
@@ -76,7 +68,7 @@ class AuthService {
     return user;
   };
 
-  public getMe = async (userId: string) => {
+  public getMe = async (userId: object) => {
     const user: User = await this.users.findById(userId);
     return user;
   };
