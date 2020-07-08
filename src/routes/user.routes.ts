@@ -13,13 +13,12 @@ class UserRoute implements Route {
   }
 
   public initializeRoutes() {
-    // this.router.use(protect);
-    this.router.get(`${this.path}s`, this.UserController.getAllUsers);
+    this.router.get(`${this.path}s`, protect, this.UserController.getAllUsers);
 
     this.router
       .route(`${this.path}/:id`)
-      .get(this.UserController.getUser)
-      .delete(this.UserController.deleteUser);
+      .get(protect, this.UserController.getUser)
+      .delete(protect, this.UserController.deleteUser);
   }
 }
 

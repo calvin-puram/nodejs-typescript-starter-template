@@ -17,8 +17,10 @@ describe("Testing Users", () => {
     confirmPassword: "2begood4",
   };
   let user: User;
+  let token: string;
   beforeAll(async () => {
     user = await Users.create(userData);
+    token = await user.sendToken();
   });
 
   afterAll(async () => {
@@ -28,7 +30,9 @@ describe("Testing Users", () => {
 
   describe("[GET] /users", () => {
     it("should get all the users", async () => {
-      const res = await request(app.getServer()).get(`${userRoute.path}s`);
+      const res = await request(app.getServer())
+        .get(`${userRoute.path}s`)
+        .set("authorization", `Bearer ${token}`);
 
       expect(res.status).toBe(200);
       expect(res.body.success).toBeTruthy();
@@ -37,9 +41,10 @@ describe("Testing Users", () => {
 
   describe("[GET] /user", () => {
     it("should get a single user", async () => {
-      const res = await request(app.getServer()).get(
-        `${userRoute.path}/${user._id}`
-      );
+      const res = await request(app.getServer())
+        .get(`${userRoute.path}/${user._id}`)
+        .set("authorization", `Bearer ${token}`);
+
       expect(res.status).toBe(200);
       expect(res.body.success).toBeTruthy();
     });
@@ -47,9 +52,9 @@ describe("Testing Users", () => {
 
   describe("[DELETE] /user/:id", () => {
     it("should delete a user", async () => {
-      const res = await request(app.getServer()).get(
-        `${userRoute.path}/${user._id}`
-      );
+      const res = await request(app.getServer())
+        .get(`${userRoute.path}/${user._id}`)
+        .set("authorization", `Bearer ${token}`);
 
       expect(res.status).toBe(200);
       expect(res.body.success).toBeTruthy();
